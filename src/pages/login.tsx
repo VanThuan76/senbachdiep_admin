@@ -30,10 +30,9 @@ const Login = () => {
   return (
     <div className='relative h-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0'>
       <div className='relative flex-col bg-muted p-10 text-white dark:border-r md:h-full lg:flex'>
-        <div className='login-background absolute inset-0 bg-[#E6D7BD]' />
+        <div className='login-background absolute inset-0 bg-[url("/images/background.jpg")] bg-cover bg-no-repeat' />
         <div className='relative z-20 flex items-center text-lg font-medium'>
           <Logo />
-          &nbsp; {process.env.NEXT_PUBLIC_APP_NAME}
         </div>
         <div className='relative z-20 mt-auto'>
           <h1 className='flex w-full items-center justify-start gap-4 text-4xl font-semibold tracking-tight'>

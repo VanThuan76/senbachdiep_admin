@@ -1,8 +1,8 @@
 export interface ILoginedUser {
-    token: string,
-    user: IUser
+  token: string;
+  user: IUser;
 }
 interface IUser {
-    name: string
-    phone: string
+  name: string;
+  phone: string;
 }

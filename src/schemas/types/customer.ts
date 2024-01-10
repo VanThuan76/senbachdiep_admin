@@ -12,6 +12,8 @@ export interface ICustomer {
   points: number;
   bonus_coins?: any;
   avatar_path?: string;
+  created_at: string;
+  updated_at: string;
 }
 
 interface Personalbranch {

@@ -2,13 +2,13 @@ import { ChevronRight } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-type Breadcrumb = {
+export type IBreadcrumb = {
   url: string;
   title: string;
 };
 
 type Props = {
-  breadcrumbs: Breadcrumb[];
+  breadcrumbs: IBreadcrumb[];
 };
 
 const Breadcrumb = ({ breadcrumbs }: Props) => {

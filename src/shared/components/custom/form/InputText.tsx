@@ -9,12 +9,14 @@ type Props = {
   label?: string;
   placeHolder?: string;
   className?: string;
+  disabled?: boolean;
 };
 
-export default function InputText({ fieldName, form, label, placeHolder, className }: Props) {
+export default function InputText({ fieldName, form, label, placeHolder, className, disabled = false }: Props) {
   const value = form.watch(fieldName);
   return (
     <FormField
+      disabled={disabled}
       control={form.control}
       name={fieldName}
       render={({ field }) => (

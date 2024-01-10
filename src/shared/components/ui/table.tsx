@@ -5,7 +5,7 @@ import { cn } from '@/src/shared/utils/tailwindPlugin';
 const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
   ({ className, ...props }, ref) => (
     <div className='w-full overflow-auto'>
-      <table ref={ref} className={cn('w-full caption-bottom text-sm', className)} {...props} />
+      <table ref={ref} className={cn('caption-bottom text-sm', className)} {...props} />
     </div>
   ),
 );
@@ -60,7 +60,7 @@ const TableCell = React.forwardRef<HTMLTableCellElement, React.TdHTMLAttributes<
     <td
       ref={ref}
       className={cn(
-        'min-w-max-content border border-[#C9C9C9] p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+        'border border-[#C9C9C9] p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
         className,
       )}
       {...props}

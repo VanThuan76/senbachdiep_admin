@@ -1,6 +1,6 @@
 import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
-import { Check, ChevronsUpDown } from 'lucide-react';
+import { Check, ChevronDown } from 'lucide-react';
 
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/src/shared/components/ui/form';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '@/src/shared/components/ui/command';
@@ -16,9 +16,20 @@ type Props = {
   label?: string;
   placeHolder?: string;
   options?: { value: any; label: string }[];
+  itemsSelect?: any[];
+  setItemsSelect?: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
-export default function InputSelect({ className, form, label, placeHolder, fieldName, options = [] }: Props) {
+export default function InputSelect({
+  className,
+  form,
+  label,
+  placeHolder,
+  fieldName,
+  options = [],
+  itemsSelect = [],
+  setItemsSelect,
+}: Props) {
   return (
     <FormField
       control={form.control}
@@ -35,7 +46,7 @@ export default function InputSelect({ className, form, label, placeHolder, field
                   className={cn('w-full justify-between', !field.value && 'text-muted-foreground')}
                 >
                   {field.value ? options?.find(op => op.value === field.value)?.label : placeHolder}
-                  <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+                  <ChevronDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                 </Button>
               </FormControl>
             </PopoverTrigger>
@@ -44,18 +55,26 @@ export default function InputSelect({ className, form, label, placeHolder, field
                 <CommandInput placeholder={placeHolder} />
                 <CommandEmpty>Not found...</CommandEmpty>
                 <CommandGroup>
-                  {options?.map(op => (
-                    <CommandItem
-                      value={op.value}
-                      key={op.value}
-                      onSelect={value => {
-                        form.setValue(fieldName, op.value);
-                      }}
-                    >
-                      <Check className={cn('mr-2 h-4 w-4', op.value === field.value ? 'opacity-100' : 'opacity-0')} />
-                      {op.label}
-                    </CommandItem>
-                  ))}
+                  {options
+                    ?.filter(option => !itemsSelect.includes(+option.value))
+                    .map(op => (
+                      <CommandItem
+                        value={op.value}
+                        key={op.value}
+                        onSelect={value => {
+                          form.setValue(fieldName, op.value);
+                          if (setItemsSelect) {
+                            setItemsSelect((prevItemSelect: any) => {
+                              const uniqueValues = new Set([...prevItemSelect, op.value]);
+                              return Array.from(uniqueValues);
+                            });
+                          }
+                        }}
+                      >
+                        <Check className={cn('mr-2 h-4 w-4', op.value === field.value ? 'opacity-100' : 'opacity-0')} />
+                        {op.label}
+                      </CommandItem>
+                    ))}
                 </CommandGroup>
               </Command>
             </PopoverContent>

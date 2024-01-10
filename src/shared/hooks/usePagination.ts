@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 import { useDebugValue } from 'react';
 import { Filter, ISearchParams } from '@/src/shared/utils/typeSearchParams';
 import { PAGINATION } from '@/src/shared/constants/setting';
+import { ConditionItem } from '@/src/schemas/types/base';
 
 type Props<T> = {
   apiFn: (_params?: ISearchParams) => Promise<T>;
@@ -139,6 +140,40 @@ export default function usePagination<T>({ queryKey, apiFn, defaultParams }: Pro
       query: newQuery,
     });
   }
+  /**
+   * @description parse from filters to URL then if filters already exist it will replace old value
+   * @param filters: ConditionItem[]
+   * @return void
+   *
+   */
+  function onChangeMultiSearchParams(filters: ConditionItem[]) {
+    const oldQuery = router.query;
+    const oldFilterArr = parseURLSearch(oldQuery.search as string);
+
+    let newFilterArr: ConditionItem[] = [];
+
+    filters.forEach(newFilter => {
+      const existingFilterIndex = oldFilterArr.findIndex(oldFilter => oldFilter.property === newFilter.property);
+      if (existingFilterIndex !== -1) {
+        if (newFilter.value !== undefined && newFilter.value !== null && newFilter.value !== '') {
+          newFilterArr.push({ ...newFilter, value: newFilter.value });
+        }
+        oldFilterArr.splice(existingFilterIndex, 1); // Remove the matched filter from the old array
+      } else if (newFilter.value !== undefined && newFilter.value !== null && newFilter.value !== '') {
+        newFilterArr.push(newFilter);
+      }
+    });
+
+    newFilterArr = [...newFilterArr, ...oldFilterArr]; // Add any remaining old filters
+
+    const newFilterArrJson = stringifyArrayObj(newFilterArr.filter(item => item.value !== undefined));
+    const newQuery = { ...oldQuery, page: 0, search: newFilterArrJson };
+
+    router.push({
+      pathname: router.pathname,
+      query: newQuery,
+    });
+  }
 
   const finalFilter = defaultParams?.filters ? [...filters, ...defaultParams.filters] : filters;
   const { data, isLoading, refetch } = useQuery({
@@ -179,5 +214,25 @@ export default function usePagination<T>({ queryKey, apiFn, defaultParams }: Pro
     onChangeSearchArrayParams,
     getFieldValueOnSearchParam,
     getFieldValueOnSearchParam2,
+    onChangeMultiSearchParams,
   };
+}
+
+/**
+ * @description get value of search params in  params 'search'
+ */
+export function getFieldValueOnSearchParamServerSide(key: string, query: NextRouter['query']) {
+  let oldFilterArr = [];
+  try {
+    oldFilterArr = parseURLSearch(query.search as string);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log(e);
+  }
+  if (oldFilterArr.filter(item => item.property === key).length > 0) {
+    if (oldFilterArr.filter(item => item.property === key).length === 1)
+      return oldFilterArr.find(item => item.property === key).value;
+    else return oldFilterArr.filter(item => item.property === key).map(item => item.value);
+  }
+  return null;
 }

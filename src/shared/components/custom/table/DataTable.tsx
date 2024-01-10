@@ -15,6 +15,9 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/src/shared/components/ui/table';
 import { Skeleton } from '@/src/shared/components/ui/skeleton';
 import DataTablePagination from './DataTablePagination';
+import { Popover, PopoverContent, PopoverTrigger } from '@/src/shared/components/ui/popover';
+import ThreeDotAlign from '@/src/shared/components/icons/ThreeDotAlign';
+import { useRouter } from 'next/router';
 
 export const COLUMNDATA_TYPE = {
   STRING: 'string',
@@ -45,7 +48,6 @@ function DataTable<TData, TValue>({
   pageSize,
   pageIndex,
   isLoading,
-  setCollapseStates,
   handChangePagination,
 }: DataTableProps<TData, TValue>) {
   const [columnVisibility, setColumnVisibility] = useLocalStorage(
@@ -54,7 +56,7 @@ function DataTable<TData, TValue>({
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
-
+  const router = useRouter();
   const table = useReactTable({
     data,
     columns,
@@ -81,22 +83,19 @@ function DataTable<TData, TValue>({
       table.setPageIndex(pageIndex);
     }
   }, [pageIndex, pageSize, isClientPagination, table]);
-
-  const handleRowClick = (rowId: string) => {
-    setCollapseStates(prevState => ({
-      ...prevState,
-      [rowId]: !prevState[rowId],
-    }));
-  };
-
   return (
     <div className=''>
-      {/* <DataTableHeader table={table} /> */}
       <div className='w-full rounded-md border'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map(headerGroup => (
               <TableRow key={headerGroup.id}>
+                <TableHead
+                  key={0}
+                  className='sticky left-0 flex min-h-[20px] w-full items-center justify-center border-0 border-r border-r-slate-500 bg-white'
+                >
+                  #
+                </TableHead>
                 {headerGroup.headers.map(header => {
                   return (
                     <TableHead key={header.id}>
@@ -111,7 +110,7 @@ function DataTable<TData, TValue>({
             <TableBody>
               {Array.from(Array(table.getState().pagination.pageSize).keys()).map(index => (
                 <TableRow key={index}>
-                  <TableCell colSpan={columns.length} className='px-4'>
+                  <TableCell colSpan={columns.length + 1} className='px-4'>
                     <Skeleton className='mx-2 h-10 w-full rounded-xl ' />
                   </TableCell>
                 </TableRow>
@@ -119,24 +118,43 @@ function DataTable<TData, TValue>({
             </TableBody>
           ) : (
             <TableBody>
-              {table.getRowModel().rows?.length ? (
+              {table.getRowModel().rows?.length + 1 ? (
                 table.getRowModel().rows.map(row => (
-                  <>
-                    <TableRow
-                      key={row.id}
-                      data-state={row.getIsSelected() && 'selected'}
-                      onClick={() => handleRowClick(row.id)}
-                      className='h-[80px] cursor-pointer shadow-lg'
-                    >
-                      {row.getVisibleCells().map(cell => (
-                        <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                      ))}
-                    </TableRow>
-                  </>
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && 'selected'}
+                    className='relative h-full cursor-pointer shadow-lg'
+                  >
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <TableCell className='sticky left-0 flex min-h-[80px] w-full items-center justify-center border-0 border-r border-r-slate-500 bg-white'>
+                          <ThreeDotAlign className='h-[16px] w-[16px]' />
+                        </TableCell>
+                      </PopoverTrigger>
+                      <PopoverContent
+                        align='end'
+                        className='absolute bottom-0 flex max-w-[130px] flex-col items-start justify-start gap-2 px-4 py-2'
+                      >
+                        <div className='flex items-center justify-start gap-4'>
+                          <div className='h-[8px] w-[8px] rounded-full bg-[#DFD24C]'></div>
+                          {/* @ts-ignore: Must be have id(unique) */}
+                          <p onClick={() => row.original && router.push(`/${row.original?.id}`)}>Xem</p>
+                        </div>
+                        <div className='flex items-center justify-start gap-4'>
+                          <div className='h-[8px] w-[8px] rounded-full bg-[#DFD24C]'></div>
+                          {/* @ts-ignore: Must be have id(unique) */}
+                          <p onClick={() => row.original && router.push(`/edit/${row.original?.id}`)}>Chỉnh sửa</p>
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                    {row.getVisibleCells().map(cell => (
+                      <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                    ))}
+                  </TableRow>
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={columns.length} className='h-24 text-center'>
+                  <TableCell colSpan={columns.length + 1} className='h-24 text-center'>
                     No results.
                   </TableCell>
                 </TableRow>

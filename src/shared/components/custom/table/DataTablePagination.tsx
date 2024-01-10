@@ -28,8 +28,11 @@ export default function DataTablePagination<TData>({
     );
   }
   return (
-    <div className=' ml-auto flex items-center justify-between px-2'>
-      <div className='flex items-center space-x-6 lg:space-x-8'>
+    <div className='ml-auto flex w-full items-center justify-between px-2'>
+      <p className='text-left text-sm font-normal'>
+        Hiển thị {table.getState().pagination.pageSize} bản ghi trên 200 bản ghi
+      </p>
+      <div className='flex items-center justify-between space-x-6 lg:space-x-8'>
         <div className='flex items-center space-x-2'>
           <p className='text-sm font-medium'>Số lượng mỗi trang</p>
           <Select

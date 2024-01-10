@@ -22,9 +22,9 @@ const AccountSetting = () => {
   }
   return (
     <div className='items flex gap-4'>
-      <div className='flex flex-col'>
+      <div className='flex flex-col gap-2'>
         <span className='text-sm font-semibold capitalize'>Phạm Thị Thu Uyên</span>
-        <span className='text-right text-xs text-slate-400'>Quản lý</span>
+        <span className='text-right text-xs'>Quản lý</span>
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -33,7 +33,8 @@ const AccountSetting = () => {
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end'>
-          <DropdownMenuItem onClick={() => router.push('/accountSetting')} className='flex justify-between'>
+          <DropdownMenuItem onClick={() => router.push('/accountSetting')} className='flex justify-start gap-2'>
+            <div className='h-[8px] w-[8px] rounded-full bg-[#DFD24C] transition-colors duration-300'></div>
             Thông tin tài khoản
           </DropdownMenuItem>
           {/* <DropdownMenuItem
@@ -53,10 +54,12 @@ const AccountSetting = () => {
               <Moon className='ml-3 h-[1.2rem]  w-[1.2rem]' />
             )}
           </DropdownMenuItem> */}
-          <DropdownMenuItem onClick={() => router.push('/reset-password')} className='flex justify-between'>
+          <DropdownMenuItem onClick={() => router.push('/reset-password')} className='flex justify-start gap-2'>
+            <div className='h-[8px] w-[8px] rounded-full bg-[#DFD24C] transition-colors duration-300'></div>
             Đổi mật khẩu
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => handleLogout()} className='flex justify-between'>
+          <DropdownMenuItem onClick={() => handleLogout()} className='flex justify-start gap-2'>
+            <div className='h-[8px] w-[8px] rounded-full bg-[#DFD24C] transition-colors duration-300'></div>
             Đăng xuất
           </DropdownMenuItem>
         </DropdownMenuContent>

@@ -22,7 +22,7 @@ const SidebarNav = ({ menus }: Props) => {
             <CollapsibleTrigger
               className={`group flex w-full items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-[#D9A536] hover:text-accent-foreground ${
                 isOpenMenu === item.href && 'bg-[#D9A536]'
-              }`}
+              } ${path.split('/').includes(item.href.split('/')[1]) && 'bg-[#D9A536]'}`}
             >
               <div className='flex w-full items-center justify-between'>
                 <div className='flex w-full items-center'>
@@ -41,11 +41,15 @@ const SidebarNav = ({ menus }: Props) => {
                   }}
                   className='flex items-center justify-start gap-3'
                 >
-                  <div className='h-[8px] w-[8px] rounded-full bg-[#DFD24C] transition-colors duration-300'></div>
+                  <div
+                    className={cn(
+                      'h-[8px] w-[8px] rounded-full transition-colors duration-300',
+                      path === chil.href ? 'bg-[#562A17]' : 'bg-[#DFD24C]',
+                    )}
+                  ></div>
                   <span
                     className={cn(
-                      'group flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground',
-                      path === chil.href ? 'bg-primary text-primary-foreground' : 'transparent',
+                      'group flex items-center rounded-md bg-transparent px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground',
                       item.isDisable && 'cursor-not-allowed opacity-40',
                     )}
                   >

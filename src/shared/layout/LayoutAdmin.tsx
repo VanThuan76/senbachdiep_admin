@@ -10,6 +10,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/src/shared/components/ui/sh
 import { Horizontalbar } from './HorizontalBar';
 import { MENULAYOUT } from '@/src/config/core';
 import { Logo } from '@/src/shared/components/icons/Logo';
+import LogoResponsive from '@/src/shared/components/icons/LogoResponsive';
 import { ResizablePanel, ResizablePanelGroup, ResizableHandle } from '@/src/shared/components/ui/resizable';
 import AccountSetting from '@/src/shared/components/common/admin/AccountSetting';
 
@@ -20,10 +21,10 @@ const LayoutAdmin = ({ children }: { children: React.ReactNode }) => {
   return (
     <React.Fragment>
       {MENULAYOUT === 'vertical' && (
-        <ResizablePanelGroup direction='horizontal' className='mt-0 flex w-full'>
+        <ResizablePanelGroup direction='horizontal' className='mt-0 flex h-full w-full'>
           <ResizablePanel
             defaultSize={15}
-            className='sticky top-0 hidden h-[calc(100vh_-_65px)] min-w-[200px] flex-col overflow-y-auto bg-primary-foreground/5 p-4 md:block '
+            className='sticky left-0 top-0 hidden h-[calc(100vh_-_65px)] min-w-[200px] flex-col overflow-y-auto bg-primary-foreground/5 p-4 md:block '
           >
             <div className='lg:hidden'>
               <Sheet>
@@ -39,13 +40,13 @@ const LayoutAdmin = ({ children }: { children: React.ReactNode }) => {
             </div>
             <Link href='/' className='mb-12 flex items-center space-x-2'>
               <Logo className='w-full object-cover' width={150} height={48} />
-              {/* <span className='hidden text-2xl font-bold sm:inline-block '>{process.env.NEXT_PUBLIC_APP_NAME}</span> */}
+              {/* <LogoResponsive className='w-full object-cover' width={48} height={48} /> */}
             </Link>
             <SideBarNav menus={ValidMenus()} />
           </ResizablePanel>
           <ResizableHandle withHandle className='bg-[#DFD24C]' />
           <ResizablePanel defaultSize={85} className='h-full w-full'>
-            <header className='sticky top-0 z-40 w-full border-b bg-[#EBEBEB]'>
+            <header className='sticky top-0 z-40 w-full border-b bg-[#E6D7BD]'>
               <div className='flex w-full items-center justify-between p-4'>
                 <div className='flex items-center justify-start gap-3'>
                   {SHORTCUT_MENU.map(item => (
