@@ -31,9 +31,7 @@ const Login = () => {
     <div className='relative h-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0'>
       <div className='relative flex-col bg-muted p-10 text-white dark:border-r md:h-full lg:flex'>
         <div className='login-background absolute inset-0 bg-[url("/images/background.jpg")] bg-cover bg-no-repeat' />
-        <div className='relative z-20 flex items-center text-lg font-medium'>
-          <Logo />
-        </div>
+
         <div className='relative z-20 mt-auto'>
           <h1 className='flex w-full items-center justify-start gap-4 text-4xl font-semibold tracking-tight'>
             <div className='text-yellow-400'>SEN</div>
@@ -47,7 +45,7 @@ const Login = () => {
         </div>
         <div className='relative z-20 mt-auto'>
           <blockquote className='space-y-2'>
-            <p className='text-lg'>Copyright &copy; Metaverse 2024</p>
+            <p className='text-lg'>Copyright &copy; 2024 Sen Bách Diệp. Powered by Metaverse</p>
           </blockquote>
         </div>
       </div>
@@ -55,6 +53,9 @@ const Login = () => {
         <div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[440px]'>
           <Tabs defaultValue='merchant' className='mx-auto mt-4 w-[440px]'>
             <TabsContent value='merchant'>
+              <div className='relative z-20 mb-10 flex w-full items-center justify-center text-lg font-medium'>
+                <Logo />
+              </div>
               <Card className='w-[440px]'>
                 <CardHeader>
                   <CardTitle>Đăng nhập</CardTitle>

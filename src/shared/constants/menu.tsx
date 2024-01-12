@@ -57,7 +57,7 @@ export const APP_MENU: MenuItem[] = [
     chidren: [
       {
         title: 'Ca làm việc',
-        href: '/workShift',
+        href: '/admin/operate/work_shift',
       },
       {
         title: 'Đặt lịch',
