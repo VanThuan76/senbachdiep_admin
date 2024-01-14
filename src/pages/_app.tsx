@@ -1,3 +1,4 @@
+import '../styles/business.css';
 import '../styles/globals.css';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
@@ -13,6 +14,7 @@ import { Toaster } from '@/src/shared/components/ui/toaster';
 import { nextFont, queryClient } from '@/src/config/core';
 import useRouterChange from '@/src/shared/utils/useRouterChange';
 import ProgressBarNext from '@/src/shared/components/custom/ProgressBarNext';
+import { Jelly } from '@uiball/loaders';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => React.ReactNode;
@@ -32,8 +34,8 @@ const ConfigLayout = ({
   return (
     <main className={nextFont.className}>
       {isRouteLoading && (
-        <div className='absolute z-50 flex h-screen w-screen flex-col items-center justify-center gap-2 bg-foreground/20 bg-opacity-70'>
-          {/* <Jelly color='#016390' /> */}
+        <div className='absolute z-[9999] flex h-screen w-screen flex-col items-center justify-center gap-2 bg-foreground/20 bg-opacity-70'>
+          <Jelly color='#016390' />
         </div>
       )}
       <NextThemesProvider attribute='class' defaultTheme='system' enableSystem>
@@ -49,9 +51,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <main className={nextFont.className}>
       <Head>
-        <title>SENBACHDIEP</title>
-        <meta name='description' content='SENBACHDIEP' />
-        <meta name='keywords' content='SENBACHDIEP' />
+        <title>Sen Bách Diệp</title>
+        <meta name='description' content='Sen Bách Diệp' />
+        <meta name='keywords' content='Sen Bách Diệp' />
         <meta property='og:type' content='website' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <link rel='icon' href='/logo.svg' />

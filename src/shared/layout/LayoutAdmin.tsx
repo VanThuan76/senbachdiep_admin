@@ -13,11 +13,15 @@ import { Logo } from '@/src/shared/components/icons/Logo';
 import LogoResponsive from '@/src/shared/components/icons/LogoResponsive';
 import { ResizablePanel, ResizablePanelGroup, ResizableHandle } from '@/src/shared/components/ui/resizable';
 import AccountSetting from '@/src/shared/components/common/admin/AccountSetting';
+import { usePathname } from 'next/navigation';
+import { useGetUserByAuth } from '@/src/schemas/services/user';
 
 const SideBarNav = dynamic(() => import('./SidebarNav'), { ssr: false });
 
 const LayoutAdmin = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
+  const path = usePathname();
+  useGetUserByAuth();
   return (
     <React.Fragment>
       {MENULAYOUT === 'vertical' && (
@@ -47,13 +51,15 @@ const LayoutAdmin = ({ children }: { children: React.ReactNode }) => {
           <ResizableHandle withHandle className='bg-[#DFD24C]' />
           <ResizablePanel defaultSize={85} className='h-full w-full'>
             <header className='sticky top-0 z-40 w-full border-b bg-[#E6D7BD]'>
-              <div className='flex w-full items-center justify-between p-4'>
-                <div className='flex items-center justify-start gap-3'>
+              <div className='flex w-full items-center justify-end p-4 md:justify-between'>
+                <div className='hidden items-center justify-start gap-3 md:flex'>
                   {SHORTCUT_MENU.map(item => (
                     <Button
                       type='button'
                       key={item.href}
-                      className='border-2 border-[#562A17] bg-transparent text-[#562A17] hover:bg-[#562A17] hover:text-white'
+                      className={`border-2 border-[#562A17] bg-transparent text-[#562A17] hover:bg-[#562A17] hover:text-white ${
+                        path === item.href ? 'bg-[#562A17] text-white' : ''
+                      }`}
                       onClick={() => router.push(item.href)}
                     >
                       {item.title}

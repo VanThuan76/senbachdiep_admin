@@ -5,3 +5,8 @@ export const PAGINATION = {
   SIZEKEY: 'size',
   DEFAULT_PAGE_SIZE: 10,
 };
+export const OPTIONS_FILTER = [
+  { value: '<', label: 'nhỏ hơn' },
+  { value: '>', label: 'lớn hơn' },
+  { value: '=', label: 'bằng' },
+];

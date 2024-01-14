@@ -21,9 +21,9 @@ const AccountSetting = () => {
     dispatch(logout());
   }
   return (
-    <div className='items flex gap-4'>
+    <div className='flex gap-4'>
       <div className='flex flex-col gap-2'>
-        <span className='text-sm font-semibold capitalize'>Phạm Thị Thu Uyên</span>
+        <span className='text-sm font-semibold capitalize'>{user?.name}</span>
         <span className='text-right text-xs'>Quản lý</span>
       </div>
       <DropdownMenu>

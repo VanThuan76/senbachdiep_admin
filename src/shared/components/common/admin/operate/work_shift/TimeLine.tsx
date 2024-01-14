@@ -63,6 +63,7 @@ const TimeLineWorkShift = () => {
                     status: number;
                   }[]) || []
                 ).map((child, childIndex) => {
+                  const titleDefault = `${child.id} - ${child.staff} (${child.from_at} - ${child.to_at})`;
                   const dynamicWidth = 60 * calculationTimeLine(child.to_at) - accumulatedWidth;
                   accumulatedWidth += dynamicWidth;
                   widths.push(dynamicWidth);
@@ -72,7 +73,7 @@ const TimeLineWorkShift = () => {
                       className={cn('rounded-md border-2 border-solid border-[#C9C9C9] px-2 py-4 text-center')}
                       style={{ width: dynamicWidth + 'px' }}
                     >
-                      {child.id} - {child.staff} ({child.from_at} - {child.to_at})
+                      {dynamicWidth < 250 ? `${child.id} - ${child.staff}...` : titleDefault}
                     </div>
                   );
                 })}

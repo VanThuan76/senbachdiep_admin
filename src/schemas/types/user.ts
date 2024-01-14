@@ -1,8 +1,18 @@
 export interface ILoginedUser {
-  token: string;
-  user: IUser;
+  access_token: string;
 }
-interface IUser {
+export interface IProfileUser {
+  id: number;
+  username: string;
+  password: string;
   name: string;
-  phone: string;
+  phone_number: string;
+  avatar: string;
+  access_token: string;
+  remember_token?: any;
+  branchs: string[];
+  active_branch_id: number;
+  status: number;
+  created_at: string;
+  updated_at: string;
 }

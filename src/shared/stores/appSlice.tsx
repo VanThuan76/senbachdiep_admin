@@ -1,9 +1,10 @@
+import { IProfileUser } from '@/src/schemas/types/user';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { deleteCookie, getCookie } from 'cookies-next';
 import { APP_SAVE_KEY } from '../constants/main';
 type APPSTATE = {
-  user: any | undefined;
+  user: IProfileUser | undefined;
   isLogined: boolean;
   isRouteLoading: boolean;
 };

@@ -1,9 +1,9 @@
-import { Montserrat } from 'next/font/google';
+import { Open_Sans } from 'next/font/google';
 import { QueryClient } from '@tanstack/react-query';
-export const nextFont = Montserrat({
+export const nextFont = Open_Sans({
   subsets: ['vietnamese'],
   display: 'swap',
-  weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
+  weight: ['300', '400', '500', '600', '700'],
 });
 export const queryClient = new QueryClient({
   defaultOptions: {

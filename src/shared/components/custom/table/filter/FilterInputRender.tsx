@@ -10,6 +10,7 @@ import { Button } from '@/src/shared/components/ui/button';
 import { Form } from '@/src/shared/components/ui/form';
 import { useToast } from '@/src/shared/components/ui/use-toast';
 import { Popover, PopoverContent, PopoverTrigger } from '@/src/shared/components/ui/popover';
+import { OPTIONS_FILTER } from '@/src/shared/constants/setting';
 
 type Props = {
   inputs: InputSearch[];
@@ -147,7 +148,7 @@ export default function FilterInputRender({ inputs, searchFunction, setInputs, o
                       fieldName={`condition_${index}`}
                       placeHolder='Nhập giá trị'
                       className='w-full'
-                      options={[{ value: '=', label: 'bằng' }]}
+                      options={OPTIONS_FILTER}
                     />
                     {itemsSelect ? (
                       <InputText

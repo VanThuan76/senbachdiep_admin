@@ -8,7 +8,7 @@ const QUERY_KEY = 'CustomerQuery';
 export const useGetListCustomer = (defaultFilter?: Filter[]) => {
   return usePagination<IBaseResponseWithCount<ICustomer[]>>({
     queryKey: [QUERY_KEY, 'get-all'],
-    apiFn: params => axiosInstanceNoAuth.post<IBaseResponseWithCount<ICustomer[]>>('/user', { ...params }),
+    apiFn: params => axiosInstanceNoAuth.post<IBaseResponseWithCount<ICustomer[]>>('/erp/user', { ...params }),
     defaultParams: {
       page: 1,
       size: 15,
