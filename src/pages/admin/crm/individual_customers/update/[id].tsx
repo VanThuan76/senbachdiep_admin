@@ -38,11 +38,11 @@ type Props = {
 };
 
 const UpdateIndividualCustomers = ({ customer }: Props) => {
-  if (!customer) return <></>;
   const router = useRouter();
   const doUpdateIndividualCustomers = useUpdateIndividualCustomer(customer && customer.id, () =>
     router.push('/admin/crm/individual_customers'),
   );
+  if (!customer) return <></>;
   const defaultValues: IIndividualCustomerUpdateOrCreate = {
     full_name: customer.full_name,
     phone_number: customer.phone_number,

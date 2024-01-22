@@ -37,8 +37,8 @@ type Props = {
 };
 
 const ViewIndividualCustomers = ({ customer }: Props) => {
-  if (!customer) return <></>;
   const router = useRouter();
+  if (!customer) return <></>;
   const defaultValues: IIndividualCustomerUpdateOrCreate = {
     full_name: customer.full_name,
     phone_number: customer.phone_number,

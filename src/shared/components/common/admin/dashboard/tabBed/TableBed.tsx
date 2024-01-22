@@ -94,7 +94,7 @@ const TableBed = ({ className, TABLE_NAME, data, isLoading, tableConfig, getFiel
               }, null);
             const nearestWorkShiftArray = nearestWorkShift ? [nearestWorkShift.workShift] : [];
             return (
-              <Popover modal={true}>
+              <Popover key={index} modal={true}>
                 <PopoverTrigger asChild>
                   <div
                     key={index}
@@ -117,7 +117,7 @@ const TableBed = ({ className, TABLE_NAME, data, isLoading, tableConfig, getFiel
                             </p>
                             {workShift.work_shift_services?.length > 0 &&
                               workShift.work_shift_services.map(workShiftService => (
-                                <p className='text-sm font-light'>
+                                <p className='text-sm font-light' key={workShiftService.id}>
                                   ({workShift.from_at} - {workShift.to_at}) {workShiftService.service.name}
                                 </p>
                               ))}

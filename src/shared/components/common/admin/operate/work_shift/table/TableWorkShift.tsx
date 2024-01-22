@@ -111,6 +111,7 @@ const TableWorkShift = ({ isLoading, className, TABLE_NAME, data, tableConfig, g
               <div className='flex h-full w-full flex-col gap-2 overflow-y-scroll'>
                 {item.workShifts.map(workShift => (
                   <ConfirmDialog
+                    key={workShift.id}
                     className='min-w-[800px]'
                     triggerCpn={
                       <p key={workShift.id} className='cursor-pointer border-b border-[#C9C9C9] text-sm'>
