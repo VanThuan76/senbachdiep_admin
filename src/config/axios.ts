@@ -117,3 +117,4 @@ class Axios {
 
 export const axiosInstance = new Axios(process.env.NEXT_PUBLIC_API_URL as string, false);
 export const axiosInstanceNoAuth = new Axios(process.env.NEXT_PUBLIC_API_URL as string, true);
+export const axiosPartnerProvince = new Axios('https://provinces.open-api.vn' as string, true);

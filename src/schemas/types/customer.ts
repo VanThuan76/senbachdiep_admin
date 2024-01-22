@@ -26,3 +26,25 @@ interface Personaltechnician {
   id?: number;
   name?: string;
 }
+
+//Form
+export interface IIndividualCustomerUpdateOrCreate {
+  full_name: string;
+  phone_number: string;
+  email: string;
+  national?: string;
+  province_city?: string;
+  district?: string;
+  wards?: string;
+  birthday?: string;
+  gender?: number;
+  address?: string;
+  note?: string;
+  customer_type: number;
+  branch_id?: number;
+  person_in_charge?: number;
+  campaign_id?: number;
+  customer_resources?: number;
+  presenter_id?: number;
+  caring_service_id?: Array<string>;
+}

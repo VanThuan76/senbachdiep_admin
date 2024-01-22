@@ -30,6 +30,7 @@ export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   tableName: string;
+  visibleThead?: boolean;
   isClientPagination?: boolean;
   isLoading: boolean;
   pageSize: number;
@@ -41,6 +42,7 @@ export interface DataTableProps<TData, TValue> {
 
 function DataTable<TData, TValue>({
   columns,
+  visibleThead = false,
   data,
   tableName,
   isClientPagination = false,
@@ -87,25 +89,27 @@ function DataTable<TData, TValue>({
     <div className=''>
       <div className='w-full rounded-md border'>
         <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map(headerGroup => (
-              <TableRow key={headerGroup.id}>
-                <TableHead
-                  key={0}
-                  className='sticky left-0 flex min-h-[20px] w-full items-center justify-center border-0 border-r border-r-slate-500 bg-white'
-                >
-                  #
-                </TableHead>
-                {headerGroup.headers.map(header => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
+          {!visibleThead && (
+            <TableHeader>
+              {table.getHeaderGroups().map(headerGroup => (
+                <TableRow key={headerGroup.id}>
+                  <TableHead
+                    key={0}
+                    className='sticky left-0 flex min-h-[20px] w-full items-center justify-center border-0 border-r border-r-slate-500 bg-white'
+                  >
+                    #
+                  </TableHead>
+                  {headerGroup.headers.map(header => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                      </TableHead>
+                    );
+                  })}
+                </TableRow>
+              ))}
+            </TableHeader>
+          )}
           {isLoading ? (
             <TableBody>
               {Array.from(Array(table.getState().pagination.pageSize).keys()).map(index => (

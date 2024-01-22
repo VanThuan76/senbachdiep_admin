@@ -5,12 +5,12 @@ const MapsContact = () => {
   const { trans } = useTrans();
   return (
     <section id='MapsContact' className='w-screen px-4 pb-4 md:px-24 md:pb-8 lg:pb-10 xl:pb-24'>
-      <h1 className='mt-5 font-bold text-2xl mb-3 border-b border-b-[#555]'>{trans.common.home}</h1>
-      <p className='font-bold text-md mb-3'>
+      <h1 className='mb-3 mt-5 border-b border-b-[#555] text-2xl font-bold'>{trans.common.home}</h1>
+      <p className='text-md mb-3 font-bold'>
         {trans.common.phone_number}: {trans.common.business_info.phone_number}
       </p>
-      <p className='font-bold text-md mb-3'>Email: {trans.common.business_info.email}</p>
-      <p className='font-bold text-md mb-3'>
+      <p className='text-md mb-3 font-bold'>Email: {trans.common.business_info.email}</p>
+      <p className='text-md mb-3 font-bold'>
         {trans.common.address}: {trans.common.business_info.address}
       </p>
       <iframe

@@ -50,11 +50,11 @@ export default function InputSelect({
                 </Button>
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className='w-full p-0'>
+            <PopoverContent className='h-[300px] w-full p-0'>
               <Command>
                 <CommandInput placeholder={placeHolder} />
                 <CommandEmpty>Not found...</CommandEmpty>
-                <CommandGroup>
+                <CommandGroup className='overflow-y-scroll'>
                   {options
                     ?.filter(option => !itemsSelect.includes(+option.value))
                     .map(op => (

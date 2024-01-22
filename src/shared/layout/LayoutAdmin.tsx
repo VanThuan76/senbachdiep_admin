@@ -69,7 +69,7 @@ const LayoutAdmin = ({ children }: { children: React.ReactNode }) => {
                 <AccountSetting />
               </div>
             </header>
-            <main className='flex flex-grow flex-wrap overflow-hidden py-2 pr-2 lg:py-12 lg:pr-12'>{children}</main>
+            <main className='flex flex-grow flex-wrap overflow-hidden p-4 md:p-8'>{children}</main>
           </ResizablePanel>
         </ResizablePanelGroup>
       )}

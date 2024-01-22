@@ -1,10 +1,14 @@
 import LayoutAdmin from '@/src/shared/layout/LayoutAdmin';
 import HeadPage from '@/src/shared/components/common/HeadPage';
 import TimeLineWorkShift from '@/src/shared/components/common/admin/operate/work_shift/TimeLine';
+import FilterWorkShift from '@/src/shared/components/common/admin/operate/work_shift/filter/FilterWorkShift';
+import { useGetListWorkShift } from '@/src/schemas/services/workShift';
+import TableWorkShift from '@/src/shared/components/common/admin/operate/work_shift/table/TableWorkShift';
 
 const WorkShiftPage = () => {
+  const { data, tableConfig, getFieldValueOnSearchParam, onChangeMultiSearchParams } = useGetListWorkShift();
   return (
-    <div className='mx-auto flex w-full flex-col items-center justify-center gap-8 px-8'>
+    <div className='mx-auto flex w-full flex-col items-center justify-center gap-8'>
       {/* //Head */}
       <HeadPage
         title='Ca làm việc'
@@ -17,8 +21,17 @@ const WorkShiftPage = () => {
           href: '/admin/operate/work_shift/create',
         }}
       />
+      {/* //Filter */}
+      <FilterWorkShift onChangeMultiSearchParams={onChangeMultiSearchParams} />
       {/* //TimeLine */}
-      <TimeLineWorkShift />
+      {/* <TimeLineWorkShift /> */}
+      {/* //Table */}
+      <TableWorkShift
+        TABLE_NAME={'WORK_SHIFT'}
+        data={data?.data || []}
+        tableConfig={tableConfig}
+        getFieldValueOnSearchParam={getFieldValueOnSearchParam}
+      />
     </div>
   );
 };

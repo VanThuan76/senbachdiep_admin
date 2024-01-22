@@ -2,7 +2,7 @@ import React, { SVGProps } from 'react';
 
 export default function IconLogoZalo({ ...rest }: SVGProps<SVGSVGElement>) {
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' width='20' height='20' viewBox='0 0 48 48' { ...rest }>
+    <svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' width='20' height='20' viewBox='0 0 48 48' {...rest}>
       <path
         fill='#2962ff'
         d='M15,36V6.827l-1.211-0.811C8.64,8.083,5,13.112,5,19v10c0,7.732,6.268,14,14,14h10	c4.722,0,8.883-2.348,11.417-5.931V36H15z'

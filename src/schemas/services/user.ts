@@ -1,6 +1,6 @@
 import { axiosInstance } from '@/src/config/axios';
 import { useToast } from '@/src/shared/components/ui/use-toast';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { IBaseResponse } from '../types/base';
@@ -8,10 +8,10 @@ import { setCookie } from 'cookies-next';
 import { APP_SAVE_KEY } from '@/src/shared/constants/main';
 import { ILoginedUser, IProfileUser } from '../types/user';
 import { login } from '@/src/shared/stores/appSlice';
+import { IIndividualCustomerUpdateOrCreate } from '../types/customer';
 
 const QUERY_KEY = 'user';
 export const useLogin = () => {
-  const dispatch = useDispatch();
   const router = useRouter();
   const { toast } = useToast();
   return useMutation({
@@ -50,6 +50,31 @@ export const useGetUserByAuth = () => {
       } else {
         router.push('/login');
       }
+    },
+  });
+};
+
+export const useCreateIndividualCustomer = (onSuccessHandle?: () => void) => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+  return useMutation({
+    mutationFn: (body: IIndividualCustomerUpdateOrCreate) =>
+      axiosInstance.post<IBaseResponse<any>>('erp/create_user', body),
+    onSuccess: data => {
+      if (!data.data) return;
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY] });
+      if (onSuccessHandle) onSuccessHandle();
+      toast({
+        variant: 'success',
+        title: 'Đăng ký khách hàng thành công',
+      });
+    },
+    onError: (err: any) => {
+      console.log(err);
+      toast({
+        variant: 'destructive',
+        title: err?.data?.data || 'Đăng ký khách hàng thất bại',
+      });
     },
   });
 };
