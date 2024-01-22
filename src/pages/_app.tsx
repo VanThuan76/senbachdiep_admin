@@ -35,7 +35,7 @@ const ConfigLayout = ({
     <main className={nextFont.className}>
       {isRouteLoading && (
         <div className='absolute z-[9999] flex h-screen w-screen flex-col items-center justify-center gap-2 bg-foreground/20 bg-opacity-70'>
-          <Jelly color='#016390' />
+          <Jelly color='#E6D7BD' />
         </div>
       )}
       <NextThemesProvider attribute='class' defaultTheme='system' enableSystem>

@@ -18,6 +18,7 @@ import DataTablePagination from './DataTablePagination';
 import { Popover, PopoverContent, PopoverTrigger } from '@/src/shared/components/ui/popover';
 import ThreeDotAlign from '@/src/shared/components/icons/ThreeDotAlign';
 import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 
 export const COLUMNDATA_TYPE = {
   STRING: 'string',
@@ -58,6 +59,7 @@ function DataTable<TData, TValue>({
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const pathName = usePathname();
   const router = useRouter();
   const table = useReactTable({
     data,
@@ -137,17 +139,19 @@ function DataTable<TData, TValue>({
                       </PopoverTrigger>
                       <PopoverContent
                         align='end'
-                        className='absolute bottom-0 flex max-w-[130px] flex-col items-start justify-start gap-2 px-4 py-2'
+                        className='absolute bottom-0 flex max-w-[130px] flex-col items-start justify-start gap-2 px-0 py-2'
                       >
-                        <div className='flex items-center justify-start gap-4'>
+                        <div className='flex w-full cursor-pointer items-center justify-start gap-4 px-4 hover:bg-[#D9A536] hover:text-accent-foreground'>
                           <div className='h-[8px] w-[8px] rounded-full bg-[#DFD24C]'></div>
                           {/* @ts-ignore: Must be have id(unique) */}
-                          <p onClick={() => row.original && router.push(`/${row.original?.id}`)}>Xem</p>
+                          <p onClick={() => row.original && router.push(`${pathName}/view/${row.original?.id}`)}>Xem</p>
                         </div>
-                        <div className='flex items-center justify-start gap-4'>
+                        <div className='flex w-full cursor-pointer items-center justify-start gap-4 px-4 hover:bg-[#D9A536] hover:text-accent-foreground'>
                           <div className='h-[8px] w-[8px] rounded-full bg-[#DFD24C]'></div>
                           {/* @ts-ignore: Must be have id(unique) */}
-                          <p onClick={() => row.original && router.push(`/edit/${row.original?.id}`)}>Chỉnh sửa</p>
+                          <p onClick={() => row.original && router.push(`${pathName}/update/${row.original?.id}`)}>
+                            Chỉnh sửa
+                          </p>
                         </div>
                       </PopoverContent>
                     </Popover>

@@ -18,6 +18,7 @@ type Props = {
   options?: { value: any; label: string }[];
   itemsSelect?: any[];
   setItemsSelect?: React.Dispatch<React.SetStateAction<any[]>>;
+  disabled?: boolean;
 };
 
 export default function InputSelect({
@@ -29,9 +30,11 @@ export default function InputSelect({
   options = [],
   itemsSelect = [],
   setItemsSelect,
+  disabled = false,
 }: Props) {
   return (
     <FormField
+      disabled={disabled}
       control={form.control}
       name={fieldName}
       render={({ field }) => (

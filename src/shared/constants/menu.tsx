@@ -1,4 +1,4 @@
-import { CalendarDays, Files, ShoppingCart, User } from 'lucide-react';
+import { CalendarDays, Files, HomeIcon, ShoppingCart, User } from 'lucide-react';
 
 export type MenuItem = {
   title: string;
@@ -11,6 +11,11 @@ export type MenuItem = {
 };
 
 export const APP_MENU: MenuItem[] = [
+  {
+    title: 'Trang chủ',
+    href: '/admin',
+    Icon: <HomeIcon className='mr-2 h-5 w-5' />,
+  },
   {
     title: 'Bán hàng',
     href: '/sale',
@@ -80,7 +85,7 @@ export const APP_MENU: MenuItem[] = [
         href: '/report',
       },
       {
-        title: 'Báo cáo tua nhân viên',
+        title: 'Báo cáo tuần nhân viên',
         href: '/report',
       },
     ],

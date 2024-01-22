@@ -1,17 +1,26 @@
 export interface ICustomer {
   id: number;
-  birthday?: string;
-  gender?: string;
+  birthday: string;
+  gender: string;
   personal_technician: Personaltechnician;
   personal_branch: Personalbranch;
+  campaign_id?: any;
+  customer_resources?: any;
+  presenter_id?: any;
+  caring_service_id?: any;
   full_name: string;
-  address?: string;
+  national?: any;
+  province_city?: any;
+  district?: any;
+  wards?: any;
+  address?: any;
   phone_number: string;
   email: string;
   customer_type: number;
   points: number;
   bonus_coins?: any;
-  avatar_path?: string;
+  avatar_path: string;
+  note?: any;
   created_at: string;
   updated_at: string;
 }
