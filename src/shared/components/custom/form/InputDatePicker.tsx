@@ -20,11 +20,21 @@ type Props = {
   placeHolder?: string;
   calendarProps?: CalendarProps;
   handleOnChange?: (value: any) => void;
+  disabled?: boolean;
 };
 
-export default function InputDatePicker({ fieldName, form, label, placeHolder, calendarProps, handleOnChange }: Props) {
+export default function InputDatePicker({
+  fieldName,
+  form,
+  label,
+  placeHolder,
+  calendarProps,
+  handleOnChange,
+  disabled = false,
+}: Props) {
   return (
     <FormField
+      disabled={disabled}
       control={form.control}
       name={fieldName}
       render={({ field }) => (

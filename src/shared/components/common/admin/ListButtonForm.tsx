@@ -4,16 +4,19 @@ type Props = {
   isLoading: any;
   resetForm: any;
   className?: string;
+  hiddenBtnBack?: boolean;
 };
-const ListButtonForm = ({ isLoading, className, resetForm }: Props) => {
+const ListButtonForm = ({ hiddenBtnBack = false, isLoading, className, resetForm }: Props) => {
   return (
     <div className={`flex items-center justify-end gap-8 ${className}`}>
-      <Button
-        className='bg-transparent text-[#562A17] shadow-none hover:bg-transparent hover:text-[#562A17]'
-        type='button'
-      >
-        Quay lại
-      </Button>
+      {!hiddenBtnBack && (
+        <Button
+          className='bg-transparent text-[#562A17] shadow-none hover:bg-transparent hover:text-[#562A17]'
+          type='button'
+        >
+          Quay lại
+        </Button>
+      )}
       <Button
         className='min-w-[100px] cursor-pointer border-2 border-[#562A17] bg-transparent text-[#562A17] shadow-none hover:bg-transparent hover:text-[#562A17]'
         type='button'

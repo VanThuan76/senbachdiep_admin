@@ -64,7 +64,7 @@ const Login = () => {
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                       <div className='grid w-full items-center gap-4'>
-                        <InputText form={form} fieldName='username' label='Tên đăng nhập' placeHolder='@ngs.com.vn' />
+                        <InputText form={form} fieldName='username' label='Tên đăng nhập' placeHolder='senbachdiep' />
                         <InputPassword
                           form={form}
                           fieldName='password'

@@ -20,10 +20,12 @@ type Props = {
   defaultValue?: Partial<IIndividualCustomerUpdateOrCreate>;
   className?: string;
   isCreate?: boolean;
+  isView?: boolean;
 };
 
 export function FormIndividualCustomers({
   isCreate = false,
+  isView = false,
   formSchema,
   onSubmit,
   isLoading,
@@ -64,7 +66,7 @@ export function FormIndividualCustomers({
         <div className='mb-8 grid w-full grid-cols-1 items-center justify-between md:grid-cols-4'>
           {/* //Head Form */}
           <HeadPage
-            title='Tạo khách hàng cá nhân'
+            title={`${isCreate ? 'Tạo' : isView ? 'Chi tiết' : 'Cập nhật'} khách hàng cá nhân`}
             breadcrumbs={[
               { title: 'CRM', url: '#' },
               { title: 'Khách hàng cá nhân', url: '/admin/crm/individual_customers' },
@@ -80,15 +82,46 @@ export function FormIndividualCustomers({
         <p className='text-xl font-medium'>Thông tin cơ bản</p>
         <div className='flex w-full flex-col items-start justify-start gap-8'>
           <div className='grid w-full grid-cols-1 gap-16 md:grid-cols-4'>
-            <InputText form={form} fieldName='full_name' label='Tên khách hàng*' placeHolder='Nhập tên khách hàng' />
-            <InputText form={form} fieldName='phone_number' label='Điện thoại 1*' placeHolder='Nhập số điện thoại 1' />
-            <InputText form={form} fieldName='phone_number_2' label='Điện thoại 2' placeHolder='Nhập số điện thoại 2' />
-            <InputText form={form} fieldName='email' label='Email*' placeHolder='Nhập email khách hàng' />
+            <InputText
+              disabled={isView}
+              form={form}
+              fieldName='full_name'
+              label='Tên khách hàng*'
+              placeHolder='Nhập tên khách hàng'
+            />
+            <InputText
+              disabled={isView}
+              form={form}
+              fieldName='phone_number'
+              label='Điện thoại 1*'
+              placeHolder='Nhập số điện thoại 1'
+            />
+            <InputText
+              disabled={isView}
+              form={form}
+              fieldName='phone_number_2'
+              label='Điện thoại 2'
+              placeHolder='Nhập số điện thoại 2'
+            />
+            <InputText
+              disabled={isView}
+              form={form}
+              fieldName='email'
+              label='Email*'
+              placeHolder='Nhập email khách hàng'
+            />
           </div>
           {FormLocation()}
           <div className='grid w-full grid-cols-1 gap-16 md:grid-cols-4'>
-            <InputDatePicker form={form} fieldName='birthday' label='Ngày sinh' placeHolder='Nhập ngày sinh' />
+            <InputDatePicker
+              disabled={isView}
+              form={form}
+              fieldName='birthday'
+              label='Ngày sinh'
+              placeHolder='Nhập ngày sinh'
+            />
             <InputSelect
+              disabled={isView}
               options={optionsGender}
               fieldName='gender'
               label='Giới tính'
@@ -96,6 +129,7 @@ export function FormIndividualCustomers({
               placeHolder='Chọn giới tính khách hàng'
             ></InputSelect>
             <InputText
+              disabled={isView}
               className='w-full grid-cols-1 md:grid-cols-2'
               form={form}
               fieldName='address'
@@ -103,13 +137,21 @@ export function FormIndividualCustomers({
               placeHolder='Nhập địa chỉ chi tiết'
             />
           </div>
-          <InputText className='w-full' form={form} fieldName='note' label='Ghi chú' placeHolder='Nhập ghi chú' />
+          <InputText
+            disabled={isView}
+            className='w-full'
+            form={form}
+            fieldName='note'
+            label='Ghi chú'
+            placeHolder='Nhập ghi chú'
+          />
         </div>
         {/* //Form-Other */}
         <p className='text-xl font-medium'>Thông tin mở rộng</p>
         <div className='flex w-full flex-col items-start justify-start gap-8'>
           <div className='grid w-full grid-cols-1 gap-16 md:grid-cols-4'>
             <InputSelect
+              disabled={isView}
               options={[]}
               fieldName='customer_type'
               label='Nhóm khách hàng*'
@@ -117,6 +159,7 @@ export function FormIndividualCustomers({
               placeHolder='Chọn nhóm khách hàng'
             ></InputSelect>
             <InputSelect
+              disabled={isView}
               options={[]}
               fieldName='branch_id'
               label='Chi nhánh chăm sóc'
@@ -124,6 +167,7 @@ export function FormIndividualCustomers({
               placeHolder='Chọn chi nhánh chăm sóc'
             ></InputSelect>
             <InputSelect
+              disabled={isView}
               options={[]}
               fieldName='person_in_charge'
               label='Người phụ trách'
@@ -133,6 +177,7 @@ export function FormIndividualCustomers({
           </div>
           <div className='grid w-full grid-cols-1 gap-16 md:grid-cols-4'>
             <InputSelect
+              disabled={isView}
               options={[]}
               fieldName='campaign_id'
               label='Chiến dịch'
@@ -140,6 +185,7 @@ export function FormIndividualCustomers({
               placeHolder='Chọn chiến dịch'
             ></InputSelect>
             <InputSelect
+              disabled={isView}
               options={[]}
               fieldName='customer_resources'
               label='Nguồn khách hàng'
@@ -147,6 +193,7 @@ export function FormIndividualCustomers({
               placeHolder='Chọn nguồn khách hàng'
             ></InputSelect>
             <InputSelect
+              disabled={isView}
               options={[]}
               fieldName='presenter_id'
               label='Người giới thiệu'
@@ -155,6 +202,7 @@ export function FormIndividualCustomers({
             ></InputSelect>
           </div>
           <InputSelect
+            disabled={isView}
             className='w-full'
             options={[]}
             fieldName='caring_service_id'

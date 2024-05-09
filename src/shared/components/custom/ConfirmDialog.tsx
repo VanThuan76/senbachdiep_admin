@@ -11,9 +11,11 @@ import {
 } from '@/src/shared/components/ui/dialog';
 
 type Props = {
+  className?: string;
   title?: React.ReactNode;
   content?: React.ReactNode;
   triggerCpn: React.ReactNode;
+  visibleBtn?: boolean;
   onOk: () => void;
 };
 
@@ -22,22 +24,24 @@ export function ConfirmDialog(props: Props) {
   return (
     <Dialog open={open} onOpenChange={() => setOpen(!open)}>
       <DialogTrigger asChild>{props.triggerCpn}</DialogTrigger>
-      <DialogContent className='sm:max-w-[425px]'>
+      <DialogContent className={`sm:max-w-[425px] ${props.className}`}>
         <DialogHeader>
           <DialogTitle>{props.title}</DialogTitle>
           <DialogDescription>{props.content}</DialogDescription>
         </DialogHeader>
-        <DialogFooter>
-          <Button
-            type='submit'
-            onClick={() => {
-              setOpen(false);
-              props.onOk();
-            }}
-          >
-            Đồng ý
-          </Button>
-        </DialogFooter>
+        {!props.visibleBtn && (
+          <DialogFooter>
+            <Button
+              type='submit'
+              onClick={() => {
+                setOpen(false);
+                props.onOk();
+              }}
+            >
+              Đồng ý
+            </Button>
+          </DialogFooter>
+        )}
       </DialogContent>
     </Dialog>
   );

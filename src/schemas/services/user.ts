@@ -78,3 +78,28 @@ export const useCreateIndividualCustomer = (onSuccessHandle?: () => void) => {
     },
   });
 };
+
+export const useUpdateIndividualCustomer = (customerId: number, onSuccessHandle?: () => void) => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+  return useMutation({
+    mutationFn: (body: IIndividualCustomerUpdateOrCreate) =>
+      axiosInstance.put<IBaseResponse<any>>(`erp/update_user/${customerId}`, body),
+    onSuccess: data => {
+      if (!data.data) return;
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY] });
+      if (onSuccessHandle) onSuccessHandle();
+      toast({
+        variant: 'success',
+        title: 'Cập nhật khách hàng thành công',
+      });
+    },
+    onError: (err: any) => {
+      console.log(err);
+      toast({
+        variant: 'destructive',
+        title: err?.data?.data || 'Cập nhật khách hàng thất bại',
+      });
+    },
+  });
+};
