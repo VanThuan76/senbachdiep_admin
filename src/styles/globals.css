@@ -98,3 +98,31 @@
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
 }
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.li-dot li {
+  list-style-type: disc;
+}
+
+section > .title {
+  padding: 30px 10px;
+}
+
+#IntroductionHome section > div:last-child::after {
+  content: '';
+  width: 50%;
+  height: 1px;
+  background-color: white;
+  margin-top: 40px;
+}
+
+.grid-content {
+  margin-top: 20px;
+}

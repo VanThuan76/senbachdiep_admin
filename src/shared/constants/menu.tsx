@@ -112,10 +112,10 @@ export const SHORTCUT_MENU: SHORTCUT_MENU[] = [
 ];
 
 export const menuWebsitePath: { path: string; children?: string[] }[] = [
-  {
-    path: 'home',
-  },
-  {
+  // {
+  //   path: 'home',
+  // },
+  /*{
     path: 'introduction',
   },
   {
@@ -127,7 +127,7 @@ export const menuWebsitePath: { path: string; children?: string[] }[] = [
   },
   {
     path: 'contact',
-  },
+  },*/
 ];
 export const footerContactData = {
   address: 'Số 36 Trần Phú, Quận Ba Đình, TP. Hà Nội',
